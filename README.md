@@ -1,14 +1,14 @@
 # GSoC-20-Proposal
-# Gensim integration with scikit-learn and Keras
+# Implementing Mesh RCNN in Tensorflow Graphics
 
 ## Contact Information
 
-**Name :** Chinmaya Pancholi<br/>
-**University :** [Indian Institute of Technology, Kharagpur](http://www.iitkgp.ac.in/)<br/>
-**Email-id :** [chinmayapancholi13@gmail.com](mailto:chinmayapancholi13@gmail.com)<br/>
-**GitHub username :** [chinmayapancholi13](https://github.com/chinmayapancholi13)<br/>
-**Blog :** [chinmayapancholi13.github.io](https://chinmayapancholi13.github.io/)<br/>
-**Time-zone :** UTC + 5:30
+**Name :** Madhav Iyengar<br/>
+**University :** [Birla Institute of Science and Technology](https://www.bits-pilani.ac.in/)<br/>
+**Email-id :** [thealmightylion.madhav@gmail.com](mailto:thealmightylion.madhav@gmail.com)<br/>
+**GitHub username :** [MadhavEsDios](https://github.com/MadhavEsDios)<br/>
+**LinkedIn :** [https://www.linkedin.com/in/madhav-iyengar-012398135/?originalSubdomain=in](https://www.linkedin.com/in/madhav-iyengar-012398135/?originalSubdomain=in)<br/>
+**Time-zone :** GMT + 5:30
 
 ## Abstract
 

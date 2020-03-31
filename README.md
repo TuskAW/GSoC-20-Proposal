@@ -22,11 +22,13 @@ MeshRCNN is one of the network architectures which combines the best of both wor
 This project will pave the way for Tensorflow based Computer Graphics/ Vision researchers to get the best out of the TF-Graphics module by providing them essential 3D functionalities / layers. It will also provide a basis for them to implement their own ideas within tf-graphics and will also allow deveopers to test new 2D-to-3D benchmarks on the MeshRCNN architecture. Apart from this, the Pix3D tensorflow-datasets Builder will provide a basis for other users to bring in their own 3D datasets into the tf-datasets API.
 This project will also be a step towards the main goal of the Tensorflow Graphics project viz. creating a single fully differentiable machine learning system which combines computer vision (to extract scene parameters) and computer graphics (use scene parameters to render a 3D scene). 
 
+![](tensorflow_graphics.jpeg)
+
 ### MaskRCNN:
 
 MaskRCNN [\[1\]](https://arxiv.org/pdf/1703.06870.pdf)is a state-of-the-art instance segmentation / object detection pipeline proposed by He et al.
 MaskRCNN builds upon the FasterRCNN architecture and introduces a Mask prediction branch as can be seen from this image:
-![](image/)
+![](Mask_RCNN.png)
 
 However the success of MaskRCNN is majorly attributed to the ROI Align module which replaces the traditional ROI Pooling used in FasterRCNN. This is because RoI boundaries are quantized in RoI Pooling which leads to misalignment between the RoI and the extracted features. Although this does not impact classification as CNN’s are robust to minor translations, it heavily impacts mask/ object bounding box predictions. RoI Align solves this problem by not quantizing any boundaries i.e. preserving floating point coordinates and then uses bi-linear interpolation to accurately calculate the value of input features.
 
@@ -46,6 +48,8 @@ In an effort to work towards this goal, Gkioxari et al. propose MeshRCNN [\[2\]]
 MeshRCNN builds upon the state-of-the-art 2D recognition architecture of MaskRCNN and introduces an additional ‘mesh prediction branch’ which outputs high-resolution triangle meshes and takes only RGB images as input. Thus, the authors of MeshRCNN have created an architecture that can predict accurate 3D shapes of multiple objects present within a real-life scene by just looking at the corresponding RGB image.
 
 MeshRCNN builds upon the MaskRCNN architecture by introducing 2 new branches viz. the Voxel Branch and the Mesh Refinement Branch.
+
+![](Mesh_RCNN.png)
 
 #### Voxel Branch:
 The voxel branch accepts features from the MaskRCNN RoI Align module as input and is responsible for estimating a coarse voxelization of each object present within a scene and ultimately converting this into a coarse 3D mesh.
@@ -86,8 +90,7 @@ We study 3D shape modeling from a single image and make contributions to it in t
 Apart from the above, another major contribution of the Pix3D dataset is that it proposes new evaluation criteria tailored specifically for the task of 3D shape reconstruction.
 
 Given the objective of the authors of MeshRCNN to create an architecture which can train on real-life images and estimate 3D shapes of multiple objects within a scene, the Pix3D dataset turns out to be a perfect fit. This is because, not only does the Pix3D dataset consist of unconstrained real-life images but also has perfectly aligned 2D image-3D shape pairs.
-The MeshRCNN network architecture which is customised for the Pix3D dataset is specified in Table No.9 in the original paper.
-[]!(link)
+The MeshRCNN network architecture which is customised for the Pix3D dataset is specified in Table No.9 in the original paper.[Link to Dataset](pix3d.csail.mit.edu)
 
 ### Tensorflow Datasets:
 Open source datasets are the utmost essentials for making progress in machine learning research. Even though plenty of such datasets such as MNIST, Cycle GAN, Pix3D, etc. are publicly available, it is still extremely difficult to include them in a machine learning pipeline. The difficulties include writing separate scripts to download these datasets and difficulties with pre-processing them into a common format given their different formats & complexities.

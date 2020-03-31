@@ -258,109 +258,110 @@ Use the open-source implementation of Mask-RCNN by Matterport [\[8\]](https://gi
 ### March 31st - May 3rd, **Proposal Review Period**
 - Even though I have lots of experience with using tensorflow and the tf.data API, I have never directly worked with the tensorflow-datasets and tensorflow-graphics modules. Since these are the 2 main modules on which this project is based, I intend to utilize this period of more than a month to investigate the tensorflow-datasets and tensorflow-graphics codebase. I have already started getting familiar with the tensorflow-datasets codebase as can be seen from my PR: which has been accepted and merged into the master branch. However, apart from this I also intend to implement small exercises involving both tf-datasets and tf-graphics on both my system and Colab. I am confident that my previous knowledge of the tf.data API and 3D computer vision will make this task easy.
 
--I also intend to resolve existing issues in these modules and submit PR’s to not only help further my knowledge but also give back to the open-source machine learning community.
+- I also intend to resolve existing issues in these modules and submit PR’s to not only help further my knowledge but also give back to the open-source machine learning community.
 
--The official implementation of MeshRCNN by Facebook-Research is in PyTorch and is based on 2 libraries viz. Pytorch3D and Detectron2.  I have extensively worked with PyTorch while performing experiments for my publication:. However, I have not yet worked with the aforementioned 2 libraries. Since the main objective of this project is to re-implement MeshRCNN in Tensorflow, I believe it is extremely important to first understand the existing implementation thoroughly. This is why I intend to investigate both Pytorch3D and Detectron2, and in the process also determine why these 2 libraries are being used in the official implementation. Again, I am confident that my experience in Pytorch and 3D computer vision will help me in finishing this task quickly.
+- The official implementation of MeshRCNN by Facebook-Research is in PyTorch and is based on 2 libraries viz. Pytorch3D and Detectron2.  I have extensively worked with PyTorch while performing experiments for my publication:. However, I have not yet worked with the aforementioned 2 libraries. Since the main objective of this project is to re-implement MeshRCNN in Tensorflow, I believe it is extremely important to first understand the existing implementation thoroughly. This is why I intend to investigate both Pytorch3D and Detectron2, and in the process also determine why these 2 libraries are being used in the official implementation. Again, I am confident that my experience in Pytorch and 3D computer vision will help me in finishing this task quickly.
 
-- I also intend to complete an extensive literature review of the ideas used in the MeshRCNN paper. These include Cubify (A multi-threaded method which is proposed as an alternative to the MarchingCubes algorithm for converting coarse voxel representation into a mesh), Vertex Alignment (Similar to Spatial Transformers by Jaderberg et al.), Graph Convolutions (Similar to Semi-supervised classification with GCN’s by Kipf et.al at ICLR’17) and Mesh Losses (Given how calculating losses on meshes is not trivial, the authors use differentiable mesh sampling on the input mesh to effectively calculate the loss over a finite set of points i.e. a dense point cloud. This is similar to the idea presented in the Pix2Mesh paper by Wang et al.)
+- Complete an extensive literature review of the ideas used in the MeshRCNN paper. These include Cubify (A multi-threaded method which is proposed as an alternative to the MarchingCubes algorithm for converting coarse voxel representation into a mesh), Vertex Alignment (Similar to Spatial Transformers by Jaderberg et al.), Graph Convolutions (Similar to Semi-supervised classification with GCN’s by Kipf et.al at ICLR’17) and Mesh Losses (Given how calculating losses on meshes is not trivial, the authors use differentiable mesh sampling on the input mesh to effectively calculate the loss over a finite set of points i.e. a dense point cloud. This is similar to the idea presented in the Pix2Mesh paper by Wang et al.)
 
 **Community Bonding Period**
 
 Before the official time period begins I intend to complete the first sub-task of this project i.e. extending tensorflow-datasets to include the Pix3D dataset.
 
 ### May 4th - May 8th
--Resolve issues with current implementation of pix3d.py
--Use tf.io operations wherever possible instead of native python io modules.
--Test script on both personal system and Colab to identify whether there are any issues with RAM. Fo eg. ‘too many files’ issue might be a RAM problem or due to incorrect closing of files in the script.
+- Resolve issues with current implementation of pix3d.py
+- Use tf.io operations wherever possible instead of native python io modules.
+- Test script on both personal system and Colab to identify whether there are any issues with RAM. Fo eg. ‘too many files’ issue might be a RAM problem or due to incorrect closing of files in the script.
+
 ### May 11th - May 15th
--Analyse different features of the Pix3D dataset and their corresponding data formats.
--Create fake examples directory with a few fake examples which mimic Pix3D data by modifying the example script: [link] or creating my own.
--In the process also ensure that fake example directory size is as small as possible.
+- Analyse different features of the Pix3D dataset and their corresponding data formats.
+- Create fake examples directory with a few fake examples which mimic Pix3D data by modifying the example script: [\[9\]](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/testing/fake_data_generation/cifar.py) or creating my own.
+- In the process also ensure that fake example directory size is as small as possible.
 
  ### May 18th - May 22nd
--Implement unit testing script which builds upon the tfds.testing.DatasetBuilderTestCase class and uses the generated fake examples to verify if pix3d.py is indeed working as intended.
--Identify if all TODO() marked directories have been modified.
--Add import, URL checksums, citations and adjust coding style.
--Submit pull request to tensorflow-datasets repository.
+- Implement unit testing script which builds upon the tfds.testing.DatasetBuilderTestCase class and uses the generated fake examples to verify if pix3d.py is indeed working as intended.
+- Identify if all TODO() marked directories have been modified.
+- Add import, URL checksums, citations and adjust coding style.
+- Submit pull request to tensorflow-datasets repository.
 
  ### May 18th - May 22nd
--Address potential issues with Pix3D pull request.
--Finalise the chosen MaskRCNN model i.e. either TF Object Detection API or open-source Matterport implementation and begin analysing the ROI Heads module.
--Modify the parameters of Box and Mask branches so that they can make predictions on Pix3D images. 
--Review Voxel Branch in current PyTorch implementation which includes predicting voxel occupancy, cubify and voxel loss.
+- Address potential issues with Pix3D pull request.
+- Finalise the chosen MaskRCNN model i.e. either TF Object Detection API or open-source Matterport implementation and begin analysing the ROI Heads module.
+- Modify the parameters of Box and Mask branches so that they can make predictions on Pix3D images. 
+- Review Voxel Branch in current PyTorch implementation which includes predicting voxel occupancy, cubify and voxel loss.
 
  ### May 25th - May 29th, Begin Voxel Branch
--Identify how ROI Heads can be extended / modified to add the Voxel branch.
--Start implementing the voxel occupancy predictor which uses the camera intrinsic matrix to make voxel predictions aligned to the image plane.
--Review Cubify defined in PyTorch 3D [link]. The current implementation uses simple PyTorch operations which are all available in Tensorflow, so re-implementing it should be straightforward. The authors of MeshRCNN clearly specify that they run Cubify as a batched operation. As can be seen in the appendix section they perform this by replacing loops with 3D convolutions. Thus there are no worries about re-implementing complicated multi-threaded operations.
+- Identify how ROI Heads can be extended / modified to add the Voxel branch.
+- Start implementing the voxel occupancy predictor which uses the camera intrinsic matrix to make voxel predictions aligned to the image plane.
+- Begin implementing Cubify defined in PyTorch 3D [\[10\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/cubify.html#cubify). The current implementation uses simple PyTorch operations which are all available in Tensorflow, so re-implementing it should be straightforward. The authors of MeshRCNN clearly specify that they run Cubify as a batched operation. As can be seen in the appendix section they perform this by replacing loops with 3D convolutions. Thus there are no worries about re-implementing complicated multi-threaded operations.
 
  ### June 1st - June 5th
--Finish voxel occupancy predictor part of the Voxel Branch.
--Implement Cubify method in tensorflow.
--Start implementing voxel occupancy prediction loss (binary cross-entropy loss) by re-implementing the voxel_rcnn_loss() method[link].
+- Finish voxel occupancy predictor part of the Voxel Branch.
+- Finish implementing Cubify method in tensorflow.
+- Start implementing voxel occupancy prediction loss (binary cross-entropy loss) by re-implementing the voxel_rcnn_loss() method[\[11\]](https://github.com/facebookresearch/meshrcnn/blob/89b59e6df2eb09b8798eae16e204f75bb8dc92a7/meshrcnn/modeling/roi_heads/mesh_head.py).
 
  ### June 8th - June 12th
--Put the voxel branch together by combining the voxel predictor, cubify and voxel loss modules.
--Test if MaskRCNN + Voxel Branch is able to train by just adding the voxel loss to the MaskRCNN loss. (Check whether any shape mismatch errors occur and also verify whether gradients are being back-propagated accurately)
--Resolve potential issues with the voxel branch
+- Put the voxel branch together by combining the voxel predictor, cubify and voxel loss modules.
+- Test if MaskRCNN + Voxel Branch is able to train by just adding the voxel loss to the MaskRCNN loss. (Check whether any shape mismatch errors occur and also verify whether gradients are being back-propagated accurately)
+- Resolve potential issues with the voxel branch
 
  ### June 15th - June 19th, Begin Mesh Refinement Stage
--Debug and investigate how Vertex Alignment is implemented in PyTorch3D
--Begin implementation of Vertex Alignment either as a separate module or as a part of tf-graphics. There are 2 options for this viz. re-implement VertAlign by imitating the PyTorch3D implementation[link] OR utilize the official implementation of the Pixel2Mesh paper which is in tensorflow[link]. 
+- Debug and investigate how Vertex Alignment is implemented in PyTorch3D
+- Begin implementation of Vertex Alignment either as a separate module or as a part of tf-graphics. There are 2 options for this viz. re-implement VertAlign by imitating the PyTorch3D implementation[\[12\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/vert_align.html#vert_align) OR utilize the official implementation of the Pixel2Mesh paper which is in tensorflow[\[13\]](https://github.com/nywang16/Pixel2Mesh). 
 
  ### June 22nd - June 26th
--Finish implementing the Vertex Alignment module.
--Perform unit tests and check whether the VertAlign module is able to process the output of the voxel branch as intended.
+- Finish implementing the Vertex Alignment module.
+- Perform unit tests and check whether the VertAlign module is able to process the output of the voxel branch as intended.
 
  ### June 22nd - June 26th
--Investigate how the GraphConv module is implemented in PyTorch3D.
--Begin re-implementation of Graph Convolution module (as a part of tf-graphics module ?) which defines both forward and backward passes of a single graph convolution layer. There are 2 options here as well viz. re-implement the GraphConv by imitating the PyTorch3D implementation[link] OR directly use the official implementation of the Kipf et. al. GCN paper in tensorflow 1.12 [link].
+- Investigate how the GraphConv module is implemented in PyTorch3D.
+- Begin re-implementation of Graph Convolution module which defines both forward and backward passes of a single graph convolution layer. There are 2 options here as well viz. re-implement the GraphConv by imitating the PyTorch3D implementation[\[14\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/graph_conv.html#GraphConv.__init__) OR directly use the official implementation of the Kipf et. al. GCN paper in tensorflow 1.12 [\[15\]](https://github.com/tkipf/gcn).
 
  ### June 29th - July 3rd
--Continue implementation of GraphConv module.
--Download and pre-process graph convolution benchmarks like Citeseer/ Cora/ Pubmed so that they can be used to test the implementation.
+- Continue implementation of GraphConv module.
+- Download and pre-process graph convolution benchmarks like Citeseer/ Cora/ Pubmed so that they can be used to test the implementation.
 
  ### July 6th - July 10th
--Finish implementation of GraphConv module.
--Independently train the module on either Citeseer/ Cora/ Pubmed and verify if GraphConv works as intended.
--Test whether GraphConv is able to work with the output from the VertAlign module.
+- Finish implementation of GraphConv module.
+- Independently train the module on either Citeseer/ Cora/ Pubmed and verify if GraphConv works as intended.
+- Test whether GraphConv is able to work with the output from the VertAlign module.
 
  ### July 13th - July 17th
--Begin implementation of SubdivideMeshes module which subdivides a triangle mesh by adding a new vertex at the center of each edge and dividing each face into four new faces.
--For this Class, I will be imitating the current implementation provided in PyTorch3D [link].
+- Begin implementation of SubdivideMeshes module which subdivides a triangle mesh by adding a new vertex at the center of each edge and dividing each face into four new faces.
+- For this Class, I will be imitating the current implementation provided in PyTorch3D [\[16\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/subdivide_meshes.html#SubdivideMeshes).
 
  ### July 20th - July 24th
--Finish implementing SubdivideMeshes module.
--Begin and finish investigation / implementation of Vertex Refinement function which involves using the tanh activation and a single learnable weight matrix.[link]
--Investigate PyTorch3D implementations of mesh_edge_loss, chamfer distance and differentiable sampling of points from meshes which will be used to calculate the MeshRefinementStage Loss.
+- Finish implementing SubdivideMeshes module.
+- Begin and finish investigation / implementation of Vertex Refinement function which involves using the tanh activation and a single learnable weight matrix.[\[17\]](https://github.com/facebookresearch/meshrcnn/blob/89b59e6df2eb09b8798eae16e204f75bb8dc92a7/shapenet/modeling/heads/mesh_head.py)
+- Investigate PyTorch3D implementations of mesh_edge_loss[\[18\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/loss/mesh_edge_loss.html#mesh_edge_loss), chamfer distance[\[19\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/loss/chamfer.html#chamfer_distance) and differentiable sampling of points from meshes[\[20\]](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/sample_points_from_meshes.html#sample_points_from_meshes) which will be used to calculate the MeshRefinementStage Loss.
 
  ### July 27th - July 31st
--Begin implementation of mesh_edge_loss, chamfer distance and sample_points_from_meshes methods.
+- Begin implementation of mesh_edge_loss, chamfer distance and sample_points_from_meshes methods.
 
  ### Aug 3rd - Aug 7th
--Finish implementation of MeshRefinementStage Loss components. 
--Combine all 3 previously implemented classes viz. VertAlign, GraphConv and SubdivideMeshes along with the Vertex Refinement operation and the MeshRefinementStage Loss to create the MeshRefinementStage module.
--Create the Mesh Refinement Branch which for the Pix3D dataset version of MeshRCNN is 3 serialized instances of the MeshRefinementStage module.
--Add the Mesh Refinement branch to the existing pipeline (MaskRCNN + Voxel branch) to finish the MeshRCNN architecture.
+- Finish implementation of MeshRefinementStage Loss components. 
+- Combine all 3 previously implemented classes viz. VertAlign, GraphConv and SubdivideMeshes along with the Vertex Refinement operation and the MeshRefinementStage Loss to create the MeshRefinementStage module.
+- Create the Mesh Refinement Branch which for the Pix3D dataset version of MeshRCNN is 3 serialized instances of the MeshRefinementStage module.
+- Add the Mesh Refinement branch to the existing pipeline (MaskRCNN + Voxel branch) to finish the MeshRCNN architecture.
 
  ### Aug 10th - Aug 14th
--Implement training and evaluation scripts which use evaluation metrics used in the paper.
--Begin writing script which will help visualize both intermediate (voxel branch, mesh refinement stages 1,2), the final mesh output and also the 2D object detections and masks.
--Begin training MeshRCNN model on Colab and keep track of gradients on TensorBoard to verify if gradients are being back-propagated correctly.
--Address potential training issues.
+- Implement training and evaluation scripts which use evaluation metrics used in the paper.
+- Begin writing script which will help visualize both intermediate (voxel branch, mesh refinement stages 1,2), the final mesh output and also the 2D object detections and masks.
+- Begin training MeshRCNN model on Colab and keep track of gradients on TensorBoard to verify if gradients are being back-propagated correctly.
+- Address potential training issues.
 
  ### Aug 17th - Aug 21st
--Continue addressing potential training issues.
--Complete training of model, verify if results match those published in the paper.
--Finish documentation of code written along with comments and style checks.
+- Continue addressing potential training issues.
+- Complete training of model, verify if results match those published in the paper.
+- Finish documentation of code written along with comments and style checks.
 
  ### Aug 24th - Aug 28th
--Address any potential issues with either training or evaluation.
--Submit Pull Request to TF-Graphics repo.
--Get feedback from mentors / repo maintainers and make changes.
+- Address any potential issues with either training or evaluation.
+- Submit Pull Request to TF-Graphics repo.
+- Get feedback from mentors / repo maintainers and make changes.
 
  ### Aug 28th - Aug 31st
--Get Pull Request merged.
+- Get Pull Request merged.
 
 
 

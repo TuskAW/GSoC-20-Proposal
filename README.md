@@ -12,20 +12,15 @@
 
 ## Abstract
 
-Gensim[\[1\]](http://radimrehurek.com/gensim/) is a topic-modeling package in Python for *unsupervised* learning. This implies that to be able to usefully apply it to a real business problem, the output generated must go to a supervised classifier. Presently, the most popular supervised learning packages are scikit-learn[\[2\]](http://scikit-learn.org/) (for simpler data analysis) and Keras[\[3\]](https://keras.io) (for artificial neural networks). Hence, the objective of this project is to create wrappers for scikit-learn and Keras around all Gensim models for seamless integration of Gensim with these libraries.
+MeshRCNN is one of the network architectures which combines the best of both worlds of 2D perception and 3D shape understanding viz. it is able to predict fine-grained instance-wise 3D shapes within a scene by just looking at corresponding unconstrained real-life images (with multiple objects, occlusing, diverse lighting). The current implementation of MeshRCNN is in PyTorch, because of which Tensorflow developers are unable to take advantage of the proposed ideas. The objective of this project is threefold,
+1. Extend Tensorflow-Datasets to include the Pix3D dataset which contains real-life 2D-3D pairs with pixel-level alignment 
 
-### Motivation:
+2. Re-implement PyTorch3D modules like Cubify, Graph Convolutions, Vertex Alignment, Differntiable Mesh Sampling and Mesh Losses in Tensorflow-Graphics and 
 
-There have been rapid advances in the field of 2D perception tasks namely: object recognition, object localization, instance segmentation, and 2D keypoint prediction. These methods achieve impressive performance in their respective tasks despite being trained on cluttered real-life images. Despite their performance, these methods ignore one essential fact viz. the world around us and the objects within it are in 3D and not the XY image plane.
+3. Re-implement MeshRCNN in Tensorflow-Graphics.
 
-At the same time, significant advances have also been made in the field of 3D shape understanding using deep learning. These advances include a variety of novel architectures which can process different 3D shape representations such as voxels, point clouds, and meshes. However, most of these methods have been trained on synthetic datasets composed of rendered objects in isolation which are drastically less complex than 2D natural image benchmarks and real-life 3D objects.
-
-Thus there is a need to develop systems which operate on unconstrained real-life images with many objects, occlusion and diverse lighting conditions (like previous work on 2D perception) but do not ignore the rich 3D structure of the world around us (like previous work on 3D shape prediction trained on synthetic benchmarks).
-
-In an effort to work towards this goal, Gkioxari et al. propose MeshRCNN which jointly performs the tasks of 2D object detection and 3D shape prediction by using a fully differentiable end-to-end architecture. 
-
-MeshRCNN builds upon the state-of-the-art 2D recognition architecture of MaskRCNN and introduces an additional ‘mesh prediction branch’ which outputs high-resolution triangle meshes and takes only RGB images as input. Thus, the authors of MeshRCNN have created an architecture that can predict accurate 3D shapes of multiple objects present within a real-life scene by just looking at the corresponding RGB image.
-
+This project will pave the way for Tensorflow based Computer Graphics/ Vision researchers to get the best out of the TF-Graphics module by providing them essential 3D functionalities / layers. It will also provide a basis for them to implement their own ideas within tf-graphics and will also allow deveopers to test new 2D-to-3D benchmarks on the MeshRCNN architecture. Apart from this, the Pix3D tensorflow-datasets Builder will provide a basis for other users to bring in their own 3D datasets into the tf-datasets API.
+This project will also be a step towards the main goal of the Tensorflow Graphics project viz. creating a single fully differentiable machine learning system which combines computer vision (to extract scene parameters) and computer graphics (use scene parameters to render a 3D scene). 
 
 ### MaskRCNN:
 
@@ -37,6 +32,8 @@ However the success of MaskRCNN is majorly attributed to the ROI Align module wh
 
 
 ### MeshRCNN:
+
+#### Motivation:
 
 There have been rapid advances in the field of 2D perception tasks namely: object recognition, object localization, instance segmentation, and 2D keypoint prediction. These methods achieve impressive performance in their respective tasks despite being trained on cluttered real-life images. Despite their performance, these methods ignore one essential fact viz. the world around us and the objects within it are in 3D and not the XY image plane.
 
@@ -378,9 +375,9 @@ Before the official time period begins I intend to complete the first sub-task o
  ### Aug 28th - Aug 31st
 - Get Pull Request merged.
 
-**Note :** I understand that my proposed time-schedule seems a bit stretched out and certain modules might have been given more time than required. This is because, I feel that this project might not be as straight-forward as it seems. However, I will do my best to finish this project before the beginning of August. If this is the eventuality that plays out, I would like to work on any other project before the coding period ends (preferably implementing Occupancy Networks).
+**Note :** I understand that my proposed time-schedule seems a bit stretched out and certain modules might have been allotted more time than required. This is because, I feel that this project might not be as straight-forward as it seems. However, I will do my best to finish this project before the beginning of August. If this is the eventuality that plays out, I would like to work on any other project before the coding period ends (preferably implementing Occupancy Networks).
 
-## Future works
+## Future Work
 
 I believe that implementing a poweful network like MeshRCNN which uses images to automatically predict accurate 3D shapes in perhaps the most popular machine learning language i.e. Tensorflow will allow developers to test their own benchmarks containing 2D-3D object pairs with ease paving the way for significant developments / research. 
 My direction of future work would be to somehow adapt MeshRCNN to accept stereo-pairs, as such a model would effectively replicate our eyes (which also predict an accurate 3D model per object with a stereo-image setup). 
@@ -413,34 +410,23 @@ Hence, seeing the potential impact of the project and its overlap with my intere
 
 Below is a list of all the web articles, libraries, code snippets and research papers mentioned in the proposal.
 
-1 - http://radimrehurek.com/gensim/<br/>
-2 - http://scikit-learn.org/<br/>
-3 - https://keras.io<br/>
-4 - https://www.numpy.org/<br/>
-5 - https://www.scipy.org/<br/>
-6 - http://www.kdnuggets.com/2015/06/top-20-python-machine-learning-open-source-projects.html<br/>
-7 - https://github.com/Theano/Theano<br/>
-8 - https://www.tensorflow.org/<br/>
-9 - https://github.com/RaRe-Technologies/movie-plots-by-genre<br/>
-10 - https://radimrehurek.com/gensim/models/word2vec.html<br/>
-11 - https://radimrehurek.com/gensim/models/doc2vec.html<br/>
-12 - https://mimno.infosci.cornell.edu/info6150/readings/398.pdf<br/>
-13 - http://svn.aksw.org/papers/2015/WSDM_Topic_Evaluation/public.pdf<br/>
-14 - https://arxiv.org/pdf/1405.4053v2.pdf<br/>
-15 - https://en.wikipedia.org/wiki/Hierarchical_Dirichlet_process<br/>
-16 - https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation<br/>
-17 - https://en.wikipedia.org/wiki/Latent_semantic_analysis<br/>
-18 - https://en.wikipedia.org/wiki/Singular_value_decomposition<br/>
-19 - https://en.wikipedia.org/wiki/Random_projection<br/>
-20 - https://en.wikipedia.org/wiki/Tf%E2%80%93idf<br/>
-21 - https://arxiv.org/abs/1301.3781<br/>
-22 - https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf<br/>
-23 - https://en.wikipedia.org/wiki/Dynamic_topic_model<br/>
-24 - http://radimrehurek.com/gensim/apiref.html<br/>
-25 - http://scikit-learn.org/stable/developers/contributing.html#apis-of-scikit-learn-objects<br/>
-26 - https://github.com/RaRe-Technologies/gensim/pull/932<br/>
-27 - http://qwone.com/~jason/20Newsgroups/<br/>
-28 - https://pythonhosted.org/shorttext/<br/>
-29 - http://gibbslda.sourceforge.net/fp224-phan.pdf<br/>
-30 - https://spacy.io/<br/>
-31 - http://textacy.readthedocs.io/en/latest/<br/>
+1 - https://arxiv.org/pdf/1703.06870.pdf<br/>
+2 - https://arxiv.org/pdf/1906.02739.pdf<br/>
+3 - https://papers.nips.cc/paper/5854-spatial-transformer-networks.pdf<br/>
+4 - https://arxiv.org/pdf/1609.02907.pdf<br/>
+5 - https://detectron2.readthedocs.io/tutorials/write-models.html<br/>
+6 - https://github.com/facebookresearch/meshrcnn/blob/948bdcef6624ea3ac5cc1595e834416d95aec37f/meshrcnn/modeling/roi_heads/roi_heads.py<br/>
+7 - https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/defining_your_own_model.md<br/>
+8 - https://github.com/matterport/Mask_RCNN<br/>
+9 - https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/testing/fake_data_generation/cifar.py<br/>
+10 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/cubify.html#cubify<br/>
+11 - https://github.com/facebookresearch/meshrcnn/blob/89b59e6df2eb09b8798eae16e204f75bb8dc92a7/meshrcnn/modeling/roi_heads/mesh_head.py<br/>
+12 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/vert_align.html#vert_align<br/>
+13 - https://github.com/nywang16/Pixel2Mesh<br/>
+14 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/graph_conv.html#GraphConv.__init__<br/>
+15 - https://github.com/tkipf/gcn<br/>
+16 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/subdivide_meshes.html#SubdivideMeshes<br/>
+17 - https://github.com/facebookresearch/meshrcnn/blob/89b59e6df2eb09b8798eae16e204f75bb8dc92a7/shapenet/modeling/heads/mesh_head.py<br/>
+18 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/loss/mesh_edge_loss.html#mesh_edge_loss<br/>
+19 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/loss/chamfer.html#chamfer_distance<br/>
+20 - https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/ops/sample_points_from_meshes.html#sample_points_from_meshes<br/>
